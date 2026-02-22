@@ -4,7 +4,9 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Observers\UserObserver;
+use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasAvatar;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -17,7 +19,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 
 #[ObservedBy([UserObserver::class])]
-class User extends Authenticatable implements HasAvatar
+class User extends Authenticatable implements HasAvatar, FilamentUser
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable, HasRoles, SoftDeletes;
@@ -58,6 +60,12 @@ class User extends Authenticatable implements HasAvatar
         ];
     }
 
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return true; 
+    }
+
     /**
      * This function will take the first later of the user name. 
      * exp: John Doe -> JD
@@ -95,7 +103,7 @@ class User extends Authenticatable implements HasAvatar
         });
     }
 
-  
+
     public function getFilamentAvatarUrl(): ?string
     {
         return $this->avatar_url;
