@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Tool;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Tool>
@@ -46,17 +47,44 @@ class ToolFactory extends Factory
         ];
 
         return [
-            'name' => $this->faker->randomElement($toolNames),
+            'name' => $toolNames[array_rand($toolNames)],
 
-            'description' => $this->faker->boolean(70)
-                ? $this->faker->sentence(12)
+            'description' => random_int(1, 100) <= 70
+                ? $this->generateSentence(12)
                 : null,
 
             'reference' => strtoupper(
-                'REF-' . $this->faker->unique()->bothify('PLC-####-??')
+                'REF-PLC-' .
+                random_int(1000, 9999) . '-' .
+                Str::upper(Str::random(2))
             ),
 
-            'qty' => $this->faker->numberBetween(0, 16),
+            'qty' => random_int(0, 16),
         ];
+    }
+
+
+    private function generateSentence(int $words = 10): string
+    {
+        $wordList = [
+            'industriel',
+            'automate',
+            'communication',
+            'réseau',
+            'installation',
+            'maintenance',
+            'équipement',
+            'contrôle',
+            'système',
+            'module',
+            'connectivité',
+            'performance',
+            'fiabilité',
+            'sécurité'
+        ];
+
+        shuffle($wordList);
+
+        return ucfirst(implode(' ', array_slice($wordList, 0, $words))) . '.';
     }
 }
