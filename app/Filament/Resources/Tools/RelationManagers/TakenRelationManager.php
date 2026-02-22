@@ -39,7 +39,8 @@ class TakenRelationManager extends RelationManager
 
         if (!auth()->user()->hasRole(UserRole::super_admin)) {
             $query->whereHas('mouvement', function (Builder $q) {
-                $q->where('user_id', auth()->id());
+                $q->where('user_id', auth()->id())
+                    ->where('tool_id', $this->ownerRecord->id);
             });
         }
 
