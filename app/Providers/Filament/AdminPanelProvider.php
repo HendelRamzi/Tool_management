@@ -41,7 +41,6 @@ class AdminPanelProvider extends PanelProvider
             ->plugins([
                 FilamentShieldPlugin::make(),
                 QuickCreatePlugin::make()
-                    ->alwaysShowModal()
                     ->createAnother(false)
                     ->renderUsingHook(PanelsRenderHook::GLOBAL_SEARCH_BEFORE),
 
