@@ -8,17 +8,18 @@ class InwardMouvement extends Model
 {
     protected $fillable = [
         'tool_id',
+        "user_id",
         'quantity',
-        "old_qty"
+        "note"
     ];
-
-    public function mouvement()
-    {
-        return $this->morphOne(Mouvement::class, 'mouvementable');
-    }
 
     public function tool()
     {
-        return $this->belongsTo(Tool::class)->withTrashed();
+        return $this->belongsTo(Tool::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

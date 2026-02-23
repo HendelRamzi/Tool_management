@@ -8,28 +8,13 @@ class ReturnMouvement extends Model
 {
     protected $fillable = [
         'tool_id',
-        "quantity"
+        "quantity",
+        "loan_mouvements_id"
     ];
 
 
-    public function getTypeLabel(): string
+    public function loanMouvement()
     {
-        return 'Taken';
-    }
-
-    public function typeColor(): string
-    {
-        return 'success';
-    }
-
-
-    public function mouvement()
-    {
-        return $this->morphOne(Mouvement::class, 'mouvementable');
-    }
-
-    public function tool()
-    {
-        return $this->belongsTo(Tool::class)->withTrashed();
+        return $this->belongsTo(LoanMouvement::class);
     }
 }

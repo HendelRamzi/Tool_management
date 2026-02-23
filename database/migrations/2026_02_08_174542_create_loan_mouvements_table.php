@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\LoanStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,7 +15,8 @@ return new class extends Migration {
             $table->id();
             $table->integer('quantity');
             $table->integer('remaining_quantity');
-
+            $table->enum('status', LoanStatus::getValues())
+                ->default(LoanStatus::Pending);
 
             $table->unsignedBigInteger('tool_id');
             $table->foreign('tool_id')->references('id')->on('tools');
