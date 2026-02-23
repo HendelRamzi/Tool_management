@@ -97,7 +97,7 @@ class TakenRelationManager extends RelationManager
             ])
             ->headerActions([
                 CreateNewLoanAction::make(true, $this->ownerRecord)
-                    ->visible(fn() => $this->ownerRecord->status !== ToolStatus::Archived),
+                    ->hidden(fn() => $this->ownerRecord->status == ToolStatus::Archived || $this->ownerRecord->status == ToolStatus::NoDisponible || $this->ownerRecord->qty < 0),
             ])
             ->recordActions([
                 ActionGroup::make([
