@@ -11,7 +11,8 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('tools', function (Blueprint $table) {
-            $table->integer('qty')->default(1);
+            $table->integer('total_quantity')->default(1);
+            $table->integer('available_quantity')->default(1);
         });
     }
 
@@ -21,7 +22,8 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::table('tools', function (Blueprint $table) {
-            $table->dropColumn('qty');
+            $table->dropColumn('total_quantity');
+            $table->dropColumn('available_qu    antity');
         });
     }
 };

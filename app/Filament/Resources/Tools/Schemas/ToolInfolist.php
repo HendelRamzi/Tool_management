@@ -48,8 +48,13 @@ class ToolInfolist
                             ToolStatus::Archived => 'warning',
 
                         }),
-                    TextEntry::make('qty')
-                        ->label('Quantity')
+                    TextEntry::make('total_quantity')
+                        ->label('Total quantity')
+                        ->size(TextSize::Large)
+                        ->badge()
+                        ->color("info"),
+                    TextEntry::make('available_quantity')
+                        ->label('Available quantity')
                         ->size(TextSize::Large)
                         ->badge()
                         ->color("info"),

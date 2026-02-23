@@ -52,8 +52,8 @@ class ToolResource extends Resource
     public static function getRelations(): array
     {
         return [
-            TakenRelationManager::class,
-            ReturnedRelationManager::class,
+            // TakenRelationManager::class,
+            // ReturnedRelationManager::class,
         ];
     }
 

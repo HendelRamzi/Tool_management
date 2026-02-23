@@ -17,7 +17,7 @@ class ToolForm
                     ->required()
                     ->placeholder('Enter tool name'),
 
-                TextInput::make('qty')
+                TextInput::make('total_quantity')
                     ->label('Quantity')
                     ->visible(fn($livewire) => $livewire instanceof EditTool)
                     ->numeric()

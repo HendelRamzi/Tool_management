@@ -50,7 +50,7 @@ class UserResource extends Resource
     public static function getRelations(): array
     {
         return [
-            MouvementsRelationManager::class, 
+            // MouvementsRelationManager::class, 
         ];
     }
 

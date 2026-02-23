@@ -39,8 +39,8 @@ class ToolsTable
                 TextColumn::make('created_at')
                     ->dateTime('d/m/Y')
                     ->sortable(),
-                TextColumn::make('qty')
-                    ->label('Quantity')
+                TextColumn::make('available_quantity')
+                    ->label('Quantity available')
                     ->sortable()
                     ->color(fn(int $state) => Tool::ColorQtyMapping($state))
                     ->badge(),

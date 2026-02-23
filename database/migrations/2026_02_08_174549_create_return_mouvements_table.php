@@ -17,7 +17,9 @@ return new class extends Migration {
 
             $table->unsignedBigInteger('tool_id');
             $table->foreign('tool_id')->references('id')->on('tools');
-            
+
+            $table->unsignedBigInteger('loan_mouvements_id');
+            $table->foreign('loan_mouvements_id')->references('id')->on('loan_mouvements');
             $table->timestamps();
         });
     }

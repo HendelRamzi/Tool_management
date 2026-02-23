@@ -38,7 +38,7 @@ class ToolObserver
      */
     public function restored(Tool $tool): void
     {
-        $tool->status = $tool->qty > 0 ? ToolStatus::Disponible : ToolStatus::NoDisponible;
+        $tool->status = $tool->available_quantity > 0 ? ToolStatus::Disponible : ToolStatus::NoDisponible;
         $tool->save();
     }
 

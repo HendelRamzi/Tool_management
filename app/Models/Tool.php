@@ -23,26 +23,11 @@ class Tool extends Model
         'name',
         'description',
         'reference',
-        'qty',
+        'total_quantity',
+        'available_quantity',
         'status'
     ];
 
-
-    // Check if the tool is available by checking if 
-    // the quantity is greater than 0 or if the status is "Disponible"
-    public static function isDispo(Tool $tool): bool
-    {
-        return $tool->qty > 0 || $tool->status === ToolStatus::Disponible;
-    }
-
-
-    // Change the tool status to "NoFunctionnal" and save the 
-    // changes to the database
-    public function isNotWorking()
-    {
-        return $this->status === ToolStatus::NoFunctionnal;
-        $this->save();
-    }
 
     // Return a color based on the quantity of the tool
     public static function ColorQtyMapping($qty): string
@@ -55,37 +40,9 @@ class Tool extends Model
         return 'info';
     }
 
-    public function qtyStatusHandling(){
-        $this->status = $this->qty > 0 ? ToolStatus::Disponible : ToolStatus::NoDisponible;
-    }
-
-    // I'll implement the quantity management here for now, but I can move it to a service class if needed
-    public static function QuantityManager($tool_id, $qty, $operation)
+    public function qtyStatusHandling()
     {
-        $tool = self::find($tool_id);
-        try {
-
-            // Check if the tool is available
-            if ($operation === LoanMouvement::class && !self::isDispo($tool)) {
-                throw new \Exception("Tool is not available");
-            }
-
-            // manage Loan operation
-            if ($operation === LoanMouvement::class) {
-                if ($tool->qty < $qty) {
-                    throw new \Exception("Not enough quantity available");
-                }
-                $tool->qty -= $qty;
-            } else {
-                $tool->qty += $qty;
-            }
-
-            $tool->qtyStatusHandling(); 
-            $tool->save();
-
-        } catch (\Exception $e) {
-            throw new \Exception($e->getMessage());
-        }
+        $this->status = $this->available_quantity > 0 ? ToolStatus::Disponible : ToolStatus::NoDisponible;
     }
 
     public function users(): BelongsToMany
@@ -93,18 +50,13 @@ class Tool extends Model
         return $this->belongsToMany(User::class)->withPivot('quantity')->withTimestamps();
     }
 
-
-    // For UI perposes, I'll add to direct connection with the 
-    // loan mouvement, and return mouvement to make relation management
-    // more simple
-
-    public function taken()
+    public function loans()
     {
         return $this->hasMany(LoanMouvement::class);
     }
 
-    public function returned()
+    public function inwards()
     {
-        return $this->hasMany(ReturnMouvement::class);
+        return $this->hasMany(InwardMouvement::class);
     }
 }
