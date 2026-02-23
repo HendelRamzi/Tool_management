@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Tools\RelationManagers;
 use App\Enums\ToolStatus;
 use App\Enums\UserRole;
 use App\Filament\Resources\Mouvements\Schemas\MouvementInfolist;
+use App\Filament\Resources\Mouvements\Schemas\RelationManagerInfolist;
 use App\Filament\Resources\Tools\Actions\CreateNewReturnAction;
 use App\Filament\Resources\Tools\Actions\ToolDeleteAction;
 use App\Filament\Resources\Tools\Pages\EditTool;
@@ -45,7 +46,7 @@ class ReturnedRelationManager extends RelationManager
 
     public function infolist(Schema $schema): Schema
     {
-        return MouvementInfolist::configure($schema);
+        return RelationManagerInfolist::configure($schema);
     }
 
     /**

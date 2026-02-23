@@ -4,29 +4,21 @@ namespace App\Filament\Resources\Tools\RelationManagers;
 
 use App\Enums\ToolStatus;
 use App\Enums\UserRole;
-use App\Filament\Resources\Mouvements\Schemas\MouvementInfolist;
+use App\Filament\Resources\Mouvements\Schemas\RelationManagerInfolist;
 use App\Filament\Resources\Tools\Actions\CreateNewLoanAction;
 use App\Filament\Resources\Tools\Actions\ToolDeleteAction;
 use App\Filament\Resources\Tools\Pages\EditTool;
 use App\Models\LoanMouvement;
 use Filament\Actions\ActionGroup;
-use Filament\Actions\AssociateAction;
 use Filament\Actions\BulkActionGroup;
-use Filament\Actions\CreateAction;
-use Filament\Actions\DeleteAction;
-use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\DissociateAction;
-use Filament\Actions\DissociateBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
-use Filament\Forms\Components\TextInput;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use function Laravel\Prompts\search;
 
 class TakenRelationManager extends RelationManager
 {
@@ -70,7 +62,7 @@ class TakenRelationManager extends RelationManager
 
     public function infolist(Schema $schema): Schema
     {
-        return MouvementInfolist::configure($schema);
+        return RelationManagerInfolist::configure($schema);
     }
 
 

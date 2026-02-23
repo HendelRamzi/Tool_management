@@ -59,7 +59,7 @@ class ToolFactory extends Factory
                 Str::upper(Str::random(2))
             ),
 
-            'qty' => random_int(0, 16),
+            'qty' => random_int(1, 16),
         ];
     }
 

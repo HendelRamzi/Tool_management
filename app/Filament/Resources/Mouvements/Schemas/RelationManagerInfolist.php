@@ -15,7 +15,7 @@ use Filament\Support\Enums\FontWeight;
 use Filament\Support\Enums\Size;
 use Filament\Support\Enums\TextSize;
 
-class MouvementInfolist
+class RelationManagerInfolist
 {
     public static function configure(Schema $schema): Schema
     {
@@ -26,8 +26,8 @@ class MouvementInfolist
                     ->weight(FontWeight::Bold)
                     ->label('Mouvement number'),
 
-                TextEntry::make('user.name')
-                    ->tooltip(fn($record) => "{$record->user->full_name}")
+                TextEntry::make('mouvement.user.name')
+                    ->tooltip(fn($record) => "{$record->mouvement->user->full_name}")
                     ->label('User name'),
 
                 TextEntry::make('tool.name')
@@ -41,6 +41,7 @@ class MouvementInfolist
 
                 TextEntry::make('mouvementable.quantity')
                     ->badge()
+                    ->visible(fn($record) => $record->mouvement->mouvementable_type === InwardMouvement::class)
                     ->color('info')
                     ->label('Added quantity'),
 
@@ -70,21 +71,21 @@ class MouvementInfolist
                             ->label('See user')
                             ->color('secondary')
                             ->url(fn($record) => UserResource::getUrl('view', [
-                                'record' => $record->user_id,
+                                'record' => $record->mouvement->user_id,
                             ]))
                     ])
                     ->schema([
-                        TextEntry::make('user.name')
+                        TextEntry::make('mouvement.user.name')
                             ->label('Code'),
-                        TextEntry::make('user.full_name')
+                        TextEntry::make('mouvement.user.full_name')
                             ->label('Name'),
-                        TextEntry::make('user.roles.name')
-                            ->badge()
-                            ->weight(FontWeight::Bold)
-                            ->size(TextSize::Large)
-                            ->color('warning')
-                            ->label('User role'),
-                        TextEntry::make('user.email')
+                        // TextEntry::make('mouvement.user.roles.name')
+                        //     ->badge()
+                        //     ->weight(FontWeight::Bold)
+                        //     ->size(TextSize::Large)
+                        //     ->color('warning')
+                        //     ->label('User role'),
+                        TextEntry::make('mouvement.user.email')
                             ->copyable()
                             ->label('Email Address'),
                     ]),
