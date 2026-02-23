@@ -18,6 +18,7 @@ use Filament\Actions\ViewAction;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -75,7 +76,12 @@ class ReturnedRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
-            ->recordTitleAttribute('id')
+            ->defaultGroup("created_at")
+            ->groups([
+                Group::make('created_at')
+                    ->date()
+                    ->label('Date'),
+            ])
             ->columns([
                 TextColumn::make('mouvement.user.name')
                     ->label('Username')
