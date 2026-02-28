@@ -6,14 +6,13 @@ use App\Filament\Resources\Tools\Pages\CreateTool;
 use App\Filament\Resources\Tools\Pages\EditTool;
 use App\Filament\Resources\Tools\Pages\ListTools;
 use App\Filament\Resources\Tools\Pages\ViewTool;
-use App\Filament\Resources\Tools\RelationManagers\ReturnedRelationManager;
-use App\Filament\Resources\Tools\RelationManagers\TakenRelationManager;
+use App\Filament\Resources\Tools\RelationManagers\MouvementRelationManager;
+
 use App\Filament\Resources\Tools\Schemas\ToolForm;
 use App\Filament\Resources\Tools\Schemas\ToolInfolist;
 use App\Filament\Resources\Tools\Tables\ToolsTable;
 use App\Models\Tool;
 use BackedEnum;
-use Filament\Resources\RelationManagers\RelationGroup;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -52,8 +51,7 @@ class ToolResource extends Resource
     public static function getRelations(): array
     {
         return [
-            TakenRelationManager::class,
-            ReturnedRelationManager::class,
+            MouvementRelationManager::class,
         ];
     }
 

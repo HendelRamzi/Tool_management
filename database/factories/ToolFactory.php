@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\ToolStatus;
 use App\Models\Tool;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
@@ -46,6 +47,7 @@ class ToolFactory extends Factory
             'Interface PROFIBUS USB',
         ];
 
+        $qty = random_int(1, 16);
         return [
             'name' => $toolNames[array_rand($toolNames)],
 
@@ -59,7 +61,9 @@ class ToolFactory extends Factory
                 Str::upper(Str::random(2))
             ),
 
-            'qty' => random_int(1, 16),
+            'qty' => $qty,
+
+            "status" => $qty > 0 ? ToolStatus::Disponible : ToolStatus::NoDisponible,
         ];
     }
 

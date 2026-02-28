@@ -98,13 +98,17 @@ class Tool extends Model
     // loan mouvement, and return mouvement to make relation management
     // more simple
 
-    public function taken()
-    {
-        return $this->hasMany(LoanMouvement::class);
-    }
+    // public function taken()
+    // {
+    //     return $this->hasMany(LoanMouvement::class);
+    // }
 
-    public function returned()
-    {
-        return $this->hasMany(ReturnMouvement::class);
+    // public function returned()
+    // {
+    //     return $this->hasMany(ReturnMouvement::class);
+    // }
+
+    public function mouvements(){
+        return $this->hasMany(Tool::class); 
     }
 }

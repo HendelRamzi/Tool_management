@@ -22,10 +22,6 @@ class MouvementsTable
     public static function configure(Table $table): Table
     {
         return $table
-            // ->query(
-            //     Mouvement::query()
-            //         ->with(['tool', 'mouvementable'])
-            // )
             ->defaultGroup("tool.reference")
             ->groups([
                 Group::make('tool.reference')

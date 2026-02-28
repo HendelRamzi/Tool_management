@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Mouvements\Schemas;
 
 use App\Enums\ToolStatus;
 use App\Enums\UserRole;
+use App\Filament\Resources\Tools\Pages\ViewTool;
 use App\Filament\Resources\Tools\ToolResource;
 use App\Filament\Resources\Users\UserResource;
 use App\Models\InwardMouvement;

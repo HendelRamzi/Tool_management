@@ -16,7 +16,7 @@ class CreateNewReturnAction
     public static function make($withIcon = false, $record)
     {
         return Action::make("create_new_return")
-            ->color('info')
+            ->color('danger')
             ->label('Return a tool')
             ->requiresConfirmation()
             ->icon($withIcon ? Heroicon::Minus : null)

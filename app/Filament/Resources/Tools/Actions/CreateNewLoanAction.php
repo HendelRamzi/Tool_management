@@ -17,7 +17,7 @@ class CreateNewLoanAction
     public static function make($withIcon = false, $record)
     {
         return Action::make("create_new_loan")
-            ->color('info')
+            ->color('success')
             ->label('Take the tool')
             ->requiresConfirmation()
             ->icon($withIcon ? Heroicon::Plus : null)

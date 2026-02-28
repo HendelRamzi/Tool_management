@@ -28,18 +28,23 @@ class MouvementsRelationManager extends RelationManager
     public function form(Schema $schema): Schema
     {
         return $schema
-            ->components([
-            ]);
+            ->components([]);
     }
 
     /**
      * Don't want the table to be diplayed on the edit page 
-     * of the user, 
      */
     public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
     {
         return $pageClass !== EditUser::class;
     }
+
+    // If the record if soft delete activate the read only mode.
+    public function isReadOnly(): bool
+    {
+        return is_null($this->ownerRecord->deleted_at) ? false : true;
+    }
+
 
     public function table(Table $table): Table
     {
