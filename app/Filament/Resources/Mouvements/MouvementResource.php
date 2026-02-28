@@ -9,6 +9,7 @@ use App\Filament\Resources\Mouvements\Pages\ListMouvements;
 use App\Filament\Resources\Mouvements\Schemas\MouvementForm;
 use App\Filament\Resources\Mouvements\Schemas\MouvementInfolist;
 use App\Filament\Resources\Mouvements\Tables\MouvementsTable;
+use App\Models\LoanMouvement;
 use App\Models\Mouvement;
 use BackedEnum;
 use Filament\Resources\Resource;
@@ -20,7 +21,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 class MouvementResource extends Resource
 {
-    protected static ?string $model = Mouvement::class;
+    protected static ?string $model = LoanMouvement::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::ArrowsUpDown;
 

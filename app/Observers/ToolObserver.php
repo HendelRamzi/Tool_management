@@ -20,7 +20,6 @@ class ToolObserver
      */
     public function updated(Tool $tool): void
     {
-        //
     }
 
     /**
@@ -29,7 +28,7 @@ class ToolObserver
     public function deleted(Tool $tool): void
     {
         // Make the tool desable when soft delete
-        $tool->status = ToolStatus::Archived; 
+        $tool->status = ToolStatus::Archived;
         $tool->save();
     }
 

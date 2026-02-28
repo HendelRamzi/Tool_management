@@ -43,6 +43,7 @@ class Tool extends Model
     public function qtyStatusHandling()
     {
         $this->status = $this->available_quantity > 0 ? ToolStatus::Disponible : ToolStatus::NoDisponible;
+        $this->save();
     }
 
     public function users(): BelongsToMany

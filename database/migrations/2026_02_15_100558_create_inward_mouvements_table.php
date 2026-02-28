@@ -13,7 +13,7 @@ return new class extends Migration {
         Schema::create('inward_mouvements', function (Blueprint $table) {
             $table->id();
             $table->integer('quantity');
-            $table->longText('Note'); 
+            $table->longText('note')->nullable(); 
 
             $table->unsignedBigInteger('tool_id');
             $table->foreign('tool_id')->references('id')->on('tools');

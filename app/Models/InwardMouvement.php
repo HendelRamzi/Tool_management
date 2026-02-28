@@ -10,7 +10,7 @@ class InwardMouvement extends Model
         'tool_id',
         "user_id",
         'quantity',
-        "note"
+        "note",
     ];
 
     public function tool()

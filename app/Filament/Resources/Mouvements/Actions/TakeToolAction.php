@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Mouvements\Pages\Actions;
 use App\Models\LoanMouvement;
 use App\Models\Mouvement;
 use App\Models\Tool;
+use App\Services\StockService;
 use Filament\Actions\Action;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -31,14 +32,14 @@ class TakeToolAction
         return [
             ToolSelectInput::make(self::getTools(), 'Select the tool to take'),
             ToolTextInput::make("Enter the quantity to take")
-                ->maxValue(fn($get) => Tool::find($get('tool_id'))?->qty ?? 0)
+                ->maxValue(fn($get) => Tool::find($get('tool_id'))?->available_quantity ?? 0)
                 ->hint(function (callable $get): ?string {
                     $toolId = $get('tool_id');
 
                     if (!is_null($toolId)) {
                         $quantity = Tool::query()
                             ->whereKey($toolId)
-                            ->value('qty');
+                            ->value('available_quantity');
 
                         return "Remaining quantity: {$quantity}";
                     }
@@ -53,7 +54,7 @@ class TakeToolAction
         return Action::make('Take a tool')
             ->schema(self::form())
             ->action(function ($data) {
-                Mouvement::CreateNewMouvement($data, LoanMouvement::class);
+                StockService::takeTool($data['tool_id'], $data['qty']);
 
                 //Create a notification to inform the user about the success of the operation
                 Notification::make()

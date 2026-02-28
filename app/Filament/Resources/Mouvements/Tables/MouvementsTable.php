@@ -22,10 +22,6 @@ class MouvementsTable
     public static function configure(Table $table): Table
     {
         return $table
-            // ->query(
-            //     Mouvement::query()
-            //         ->with(['tool', 'mouvementable'])
-            // )
             ->defaultGroup("tool.reference")
             ->groups([
                 Group::make('tool.reference')
@@ -43,12 +39,12 @@ class MouvementsTable
                     ->searchable()
                     ->label('User name'),
 
-                TextColumn::make('mouvementable_type')
+                TextColumn::make('status')
                     ->badge()
                     ->sortable()
-                    ->getStateUsing(fn($record) => $record->getTypeLabel())
-                    ->color(fn($record) => $record->typeColor())
-                    ->label('Type'),
+                    // ->getStateUsing(fn($record) => $record->getTypeLabel())
+                    // ->color(fn($record) => $record->typeColor())
+                    ->label('Status'),
 
                 TextColumn::make('tool.reference')
                     ->searchable()
@@ -58,7 +54,7 @@ class MouvementsTable
                     ->searchable()
                     ->label('Tool name'),
 
-                TextColumn::make('mouvementable.quantity')
+                TextColumn::make('quantity')
                     ->badge()
                     ->color("info")
                     ->label('Quantity'),
@@ -68,19 +64,19 @@ class MouvementsTable
                     ->sortable(),
             ])
             ->filters([
-                Filter::make('borrowed_not_returned')
-                    ->label('No returned tools')
-                    ->query(function (Builder $query): Builder {
+                // Filter::make('borrowed_not_returned')
+                //     ->label('No returned tools')
+                //     ->query(function (Builder $query): Builder {
 
-                        $toolIds = MouvementService::borrowedToolsForUser(auth()->id())->pluck('id');
+                //         $toolIds = MouvementService::borrowedToolsForUser(auth()->id())->pluck('id');
 
-                        // Si aucun tool valide → on force résultat vide
-                        if ($toolIds->isEmpty()) {
-                            return $query->whereRaw('1 = 0');
-                        }
+                //         // Si aucun tool valide → on force résultat vide
+                //         if ($toolIds->isEmpty()) {
+                //             return $query->whereRaw('1 = 0');
+                //         }
 
-                        return $query->whereIn('tool_id', $toolIds);
-                    }),
+                //         return $query->whereIn('tool_id', $toolIds);
+                //     }),
             ], FiltersLayout::Modal)
             ->recordActions([
                 ActionGroup::make([
