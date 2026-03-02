@@ -35,7 +35,6 @@ class AdminPanelProvider extends PanelProvider
             ->databaseTransactions()
             ->path('admin')
             ->login(Login::class)
-            ->passwordReset()
             ->profile(isSimple: false)
             ->sidebarFullyCollapsibleOnDesktop()
             ->plugins([

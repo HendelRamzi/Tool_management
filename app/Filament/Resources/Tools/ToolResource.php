@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Tools;
 
+use App\Enums\ToolStatus;
 use App\Filament\Resources\Tools\Pages\CreateTool;
 use App\Filament\Resources\Tools\Pages\EditTool;
 use App\Filament\Resources\Tools\Pages\ListTools;
@@ -18,14 +19,20 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use UnitEnum;
 
 class ToolResource extends Resource
 {
     protected static ?string $model = Tool::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::CircleStack;
-
+    protected static string | UnitEnum | null $navigationGroup = 'Stock management';
     protected static ?string $recordTitleAttribute = 'name';
+
+    public static function getNavigationBadge(): ?string
+    {
+        return Tool::where('status', ToolStatus::Disponible)->count();
+    }
 
     public static function getEloquentQuery(): Builder
     {

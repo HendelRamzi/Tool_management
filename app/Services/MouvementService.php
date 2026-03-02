@@ -14,25 +14,37 @@ class MouvementService
     /**
      * Calculer la quantité restante d'un outil pour un utilisateur
      */
-    public static function remainingQuantity(int $toolId, int $userId): int
+    public static function remainingQuantity(int $toolId, int $userId = null): int
     {
-        $loaned = LoanMouvement::query()
-            ->where('tool_id', $toolId)
-            ->whereHas(
-                'mouvement',
-                fn($q) =>
-                $q->where('user_id', $userId)
-            )
-            ->sum('quantity');
+        if (is_null($userId)) {
+            $loaned = LoanMouvement::query()
+                ->where('tool_id', $toolId)
+                ->sum('quantity');
 
-        $returned = ReturnMouvement::query()
-            ->where('tool_id', $toolId)
-            ->whereHas(
-                'mouvement',
-                fn($q) =>
-                $q->where('user_id', $userId)
-            )
-            ->sum('quantity');
+            $returned = ReturnMouvement::query()
+                ->where('tool_id', $toolId)
+                ->sum('quantity');
+        } else {
+            $loaned = LoanMouvement::query()
+                ->where('tool_id', $toolId)
+                ->whereHas(
+                    'mouvement',
+                    fn($q) =>
+                    $q->where('user_id', $userId)
+                )
+                ->sum('quantity');
+
+            $returned = ReturnMouvement::query()
+                ->where('tool_id', $toolId)
+                ->whereHas(
+                    'mouvement',
+                    fn($q) =>
+                    $q->where('user_id', $userId)
+                )
+                ->sum('quantity');
+
+        }
+
 
         return max($loaned - $returned, 0);
     }

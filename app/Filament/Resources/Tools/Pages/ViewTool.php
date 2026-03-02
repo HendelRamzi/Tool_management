@@ -5,7 +5,6 @@ namespace App\Filament\Resources\Tools\Pages;
 use App\Enums\ToolStatus;
 use App\Filament\Resources\Tools\Actions\ToolDeleteAction;
 use App\Filament\Resources\Tools\ToolResource;
-use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\RestoreAction;
 use Filament\Resources\Pages\ViewRecord;

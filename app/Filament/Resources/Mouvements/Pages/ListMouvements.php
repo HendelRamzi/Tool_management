@@ -10,6 +10,7 @@ use App\Filament\Resources\Mouvements\Pages\Actions\TakeToolAction;
 use App\Models\LoanMouvement;
 use App\Models\ReturnMouvement;
 use Filament\Actions\ActionGroup;
+use Filament\Support\Icons\Heroicon;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Schemas\Components\Tabs\Tab;
@@ -41,6 +42,7 @@ class ListMouvements extends ListRecords
             ])
                 ->label('Add new mouvement')
                 ->color('info')
+                ->icon(Heroicon::ChevronDown)
                 ->button()
         ];
     }

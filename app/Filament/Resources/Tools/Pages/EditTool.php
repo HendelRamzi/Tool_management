@@ -19,6 +19,7 @@ class EditTool extends EditRecord
         return [
             ToolDeleteAction::make(true),
             InwardToolAction::make($this->record)
+            ->successRedirectUrl(fn() => $this->getResource()::getUrl('edit', ['record' => $this->record]))
         ];
     }
 

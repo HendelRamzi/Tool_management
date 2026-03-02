@@ -10,6 +10,7 @@ use App\Filament\Resources\Mouvements\Tables\MouvementsTable;
 use App\Filament\Resources\Tools\Actions\CreateNewLoanAction;
 use App\Filament\Resources\Tools\Actions\CreateNewReturnAction;
 use App\Filament\Resources\Tools\Pages\EditTool;
+use App\Filament\Resources\Tools\ToolResource;
 use App\Models\Mouvement;
 use App\Services\MouvementService;
 use Filament\Actions\ActionGroup;
@@ -49,7 +50,7 @@ class MouvementRelationManager extends RelationManager
     // If the record if soft delete activate the read only mode.
     public function isReadOnly(): bool
     {
-        return is_null($this->ownerRecord->deleted_at) ? false : true ;
+        return is_null($this->ownerRecord->deleted_at) ? false : true;
     }
 
     public function form(Schema $schema): Schema
@@ -66,14 +67,16 @@ class MouvementRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return MouvementsTable::configure($table)
+            ->defaultGroup("user.name")
             ->headerActions([
                 ActionGroup::make([
                     CreateNewLoanAction::make(true, $this->ownerRecord)
-                        ->hidden(fn() => $this->ownerRecord->status == ToolStatus::Archived || $this->ownerRecord->status == ToolStatus::NoDisponible || $this->ownerRecord->qty < 0),
+                        ->hidden(fn() => $this->ownerRecord->status == ToolStatus::Archived || $this->ownerRecord->status == ToolStatus::NoDisponible || $this->ownerRecord->qty < 0)
+                        ->successRedirectUrl(fn() => ToolResource::getUrl('view', ['record' => $this->ownerRecord->id])),
                     CreateNewReturnAction::make(true, $this->ownerRecord)
-
                         ->hidden(fn() => MouvementService::remainingQuantity($this->ownerRecord->id, auth()->id()) <= 0)
-                        ->visible(fn() => $this->ownerRecord->status !== ToolStatus::Archived),
+                        ->visible(fn() => $this->ownerRecord->status !== ToolStatus::Archived)
+                        ->successRedirectUrl(fn() => ToolResource::getUrl('view', ['record' => $this->ownerRecord->id])),
                 ])->label('Mouvement actions')
                     ->button()
                     ->outlined()

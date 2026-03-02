@@ -16,6 +16,7 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use UnitEnum;
 
 
 class MouvementResource extends Resource
@@ -23,6 +24,7 @@ class MouvementResource extends Resource
     protected static ?string $model = Mouvement::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::ArrowsUpDown;
+    protected static string | UnitEnum | null $navigationGroup = 'Stock management';
 
     protected static ?string $recordTitleAttribute = 'id';
 
@@ -36,6 +38,11 @@ class MouvementResource extends Resource
         }
 
         return $query;
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return auth()->user()->hasRole(UserRole::super_admin) ? Mouvement::count() : Mouvement::where('user_id', auth()->user()->id)->count();
     }
 
     public static function form(Schema $schema): Schema
