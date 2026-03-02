@@ -30,7 +30,6 @@ class UserForm
                     ->required(),
                 Select::make('roles')
                     ->relationship('roles', 'name')
-                    ->multiple()
                     ->preload()
                     ->searchable(),
                 TextInput::make('password')

@@ -13,6 +13,7 @@ use App\Models\LoanMouvement;
 use App\Models\Mouvement;
 use App\Models\ReturnMouvement;
 use App\Services\MouvementService;
+use Carbon\Carbon;
 use DB;
 use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
@@ -78,8 +79,13 @@ class MouvementsTable
                     ->sortable(),
             ])
             ->filters([
+                Filter::make('today')
+                    ->label('Today')
+                    ->toggle()
+                    ->query(function (Builder $query) {
+                        $query->whereDate('created_at', Carbon::today());
+                    }),
                 Filter::make('date_range')
-
                     ->label('Date range')
                     ->schema([
                         DatePicker::make('from')
@@ -87,7 +93,7 @@ class MouvementsTable
 
                         DatePicker::make('until')
                             ->label('Until'),
-                    ])->columns(2)
+                    ])
                     ->query(function (Builder $query, array $data) {
 
                         return $query
@@ -110,6 +116,7 @@ class MouvementsTable
                         ReturnMouvement::class => 'Returned',
                         InwardMouvement::class => 'Stock In',
                     ]),
+
                 // Filter::make('borrowed_not_returned')
                 //     ->label('No returned tools')
                 //     ->query(function (Builder $query): Builder {
@@ -138,8 +145,6 @@ class MouvementsTable
                     CostumViewAction::make("see_user", Heroicon::User)
                         ->visible(fn($livewire) => $livewire instanceof ListMouvements)
                         ->url(fn($record) => ToolResource::getUrl('view', ['record' => $record->tool_id])),
-
-                    DeleteAction::make(),
 
                 ])->color("secondary")
             ])

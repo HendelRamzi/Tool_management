@@ -16,6 +16,7 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 class UserResource extends Resource
 {
@@ -28,6 +29,11 @@ class UserResource extends Resource
     public static function getNavigationBadge(): ?string
     {
         return static::getModel()::count();
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->withTrashed();
     }
 
     protected static ?string $recordTitleAttribute = 'name';
@@ -50,7 +56,7 @@ class UserResource extends Resource
     public static function getRelations(): array
     {
         return [
-            MouvementsRelationManager::class, 
+            MouvementsRelationManager::class,
         ];
     }
 
