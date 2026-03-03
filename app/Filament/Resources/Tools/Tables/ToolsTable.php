@@ -69,11 +69,7 @@ class ToolsTable
                 TrashedFilter::make()
                 ->native(false)
                 ->visible(auth()->user()->hasRole(UserRole::super_admin)),
-            ])->filtersTriggerAction(
-                fn(Action $action) => $action
-                    ->button()
-                    ->label('Filter'),
-            )
+            ])
             ->recordActions([
                 ActionGroup::make([
                     EditAction::make(),
