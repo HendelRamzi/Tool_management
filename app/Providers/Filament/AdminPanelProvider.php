@@ -3,6 +3,7 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Pages\Auth\Login;
+use App\Filament\Widgets\MouvementStats;
 use Awcodes\QuickCreate\QuickCreatePlugin;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use Filament\Http\Middleware\Authenticate;
@@ -42,7 +43,6 @@ class AdminPanelProvider extends PanelProvider
                 QuickCreatePlugin::make()
                     ->createAnother(false)
                     ->renderUsingHook(PanelsRenderHook::GLOBAL_SEARCH_BEFORE),
-
             ])
             ->colors([
                 'primary' => Color::Amber,
