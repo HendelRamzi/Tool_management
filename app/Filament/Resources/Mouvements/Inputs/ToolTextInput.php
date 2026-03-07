@@ -10,7 +10,7 @@ class ToolTextInput
     public static function make(string $placeholder = ""): TextInput
     {
         return TextInput::make('qty')
-            ->label('Quantity')
+            ->label(__('Quantity'))
             ->placeholder($placeholder)
             ->numeric()
             ->live()

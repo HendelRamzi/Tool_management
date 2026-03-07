@@ -27,14 +27,18 @@ class ListMouvements extends ListRecords
 {
     protected static string $resource = MouvementResource::class;
 
+    public function getTitle(): string
+    {
+        return __('Mouvements');
+    }
 
     public function content(Schema $schema): Schema
     {
         return $schema
             ->components([
-                Callout::make('Returned Tool Incomplete')
+                Callout::make(__('Returned Tool Incomplete'))
                     ->visible(fn($record) => MouvementService::userHasLoans(auth()->user()->id))
-                    ->description(fn($record) => 'You still have some tools that need to be returned')
+                    ->description(fn($record) => __('You still have some tools that need to be returned'))
                     ->danger(),
                 $this->getTabsContentComponent(), // This method returns a component to display the tabs above a table
                 RenderHook::make(PanelsRenderHook::RESOURCE_PAGES_LIST_RECORDS_TABLE_BEFORE),
@@ -63,7 +67,7 @@ class ListMouvements extends ListRecords
                 InwardToolAction::make()
                     ->visible(auth()->user()->hasRole(UserRole::super_admin)),
             ])
-                ->label('Add new mouvement')
+                ->label(__('Añadir nuevo movimiento'))
                 ->color('info')
                 ->icon(Heroicon::ChevronDown)
                 ->button()

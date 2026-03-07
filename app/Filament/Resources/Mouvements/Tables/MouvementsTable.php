@@ -5,29 +5,18 @@ namespace App\Filament\Resources\Mouvements\Tables;
 use App\Enums\UserRole;
 use App\Filament\Resources\Mouvements\Pages\Actions\CostumViewAction;
 use App\Filament\Resources\Mouvements\Pages\ListMouvements;
-use App\Filament\Resources\Tools\Pages\ViewTool;
 use App\Filament\Resources\Tools\ToolResource;
-use App\Filament\Resources\Users\Pages\ViewUser;
 use App\Models\InwardMouvement;
 use App\Models\LoanMouvement;
-use App\Models\Mouvement;
 use App\Models\ReturnMouvement;
 use App\Services\MouvementService;
 use Carbon\Carbon;
-use DB;
 use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteAction;
-use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Forms\Components\DatePicker;
-use Filament\Notifications\Notification;
 use Filament\Support\Icons\Heroicon;
-use Filament\Tables\Columns\Summarizers\Summarizer;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
@@ -41,20 +30,20 @@ class MouvementsTable
             ->defaultGroup("tool.reference")
             ->groups([
                 Group::make('tool.reference')
-                    ->label('Tool reference')
+                    ->label(__('Tool reference'))
                     ->collapsible(),
                 Group::make('user.name')
-                    ->label('User name')
+                    ->label(__('User name'))
                     ->collapsible(),
                 Group::make('created_at')
                     ->date()
-                    ->label('Date'),
+                    ->label(__('Creation date')),
             ])
             ->columns([
                 TextColumn::make('user.name')
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: false)
-                    ->label('User name'),
+                    ->label(__('User name')),
 
                 TextColumn::make('mouvementable_type')
                     ->badge()
@@ -62,44 +51,44 @@ class MouvementsTable
                     ->toggleable(isToggledHiddenByDefault: false)
                     ->getStateUsing(fn($record) => $record->getTypeLabel())
                     ->color(fn($record) => $record->typeColor())
-                    ->label('Type'),
+                    ->label(__('Type')),
 
                 TextColumn::make('tool.reference')
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: false)
-                    ->label('Tool reference'),
+                    ->label(__('Tool reference')),
 
                 TextColumn::make('tool.name')
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: false)
-                    ->label('Tool name'),
+                    ->label(__('Tool name')),
 
                 TextColumn::make('mouvementable.quantity')
                     ->badge()
                     ->toggleable(isToggledHiddenByDefault: false)
                     ->color("info")
-                    ->label('Quantity'),
+                    ->label(__('Quantity')),
 
                 TextColumn::make('created_at')
-                    ->label('Created at')
+                    ->label(__('Created at'))
                     ->toggleable(isToggledHiddenByDefault: false)
                     ->sortable(),
             ])
             ->filters([
                 Filter::make('today')
-                    ->label('Today')
+                    ->label(__('Today'))
                     ->toggle()
                     ->query(function (Builder $query) {
                         $query->whereDate('created_at', Carbon::today());
                     }),
                 Filter::make('date_range')
-                    ->label('Date range')
+                    ->label(__('Date range'))
                     ->schema([
                         DatePicker::make('from')
-                            ->label('From'),
+                            ->label(__('From')),
 
                         DatePicker::make('until')
-                            ->label('Until'),
+                            ->label(__('Until')),
                     ])
                     ->query(function (Builder $query, array $data) {
 
@@ -116,7 +105,7 @@ class MouvementsTable
                             );
                     }),
                 SelectFilter::make('mouvementable_type')
-                    ->label('Movement Type')
+                    ->label(__('Movement Type'))
                     ->native(false)
                     ->options([
                         LoanMouvement::class => 'Taken',
@@ -125,7 +114,7 @@ class MouvementsTable
                     ]),
 
                 Filter::make('borrowed_not_returned')
-                    ->label('No returned tools')
+                    ->label(__('No returned tools'))
                     ->query(function (Builder $query): Builder {
 
                         $toolIds = MouvementService::borrowedToolsForUser(auth()->id())->pluck('id');
@@ -141,15 +130,15 @@ class MouvementsTable
             ->filtersTriggerAction(
                 fn(Action $action) => $action
                     ->button()
-                    ->label('Filter'),
+                    ->label(__('Filter')),
             )
             ->recordActions([
                 ActionGroup::make([
                     ViewAction::make(),
-                    CostumViewAction::make("see_tool", Heroicon::CircleStack)
+                    CostumViewAction::make(__("see_tool"), Heroicon::CircleStack)
                         ->visible(fn($livewire) => $livewire instanceof ListMouvements)
                         ->url(fn($record) => ToolResource::getUrl('view', ['record' => $record->tool_id])),
-                    CostumViewAction::make("see_user", Heroicon::User)
+                    CostumViewAction::make(__("see_user"), Heroicon::User)
                         ->visible(fn($livewire) => $livewire instanceof ListMouvements || auth()->user()->hasRole(UserRole::super_admin))
                         ->url(fn($record) => ToolResource::getUrl('view', ['record' => $record->tool_id])),
                 ])->color("secondary")

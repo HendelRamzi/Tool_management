@@ -29,8 +29,8 @@ class TakeToolAction
     public static function form()
     {
         return [
-            ToolSelectInput::make(self::getTools(), 'Select the tool to take'),
-            ToolTextInput::make("Enter the quantity to take")
+            ToolSelectInput::make(self::getTools(), __('Select the tool to take')),
+            ToolTextInput::make(__("Enter the quantity to take"))
                 ->maxValue(fn($get) => Tool::find($get('tool_id'))?->qty ?? 0)
                 ->hint(function (callable $get): ?string {
                     $toolId = $get('tool_id');
@@ -40,7 +40,7 @@ class TakeToolAction
                             ->whereKey($toolId)
                             ->value('qty');
 
-                        return "Remaining quantity: {$quantity}";
+                        return  __('remaining_quantity', ['quantity' => $quantity]);
                     }
 
                     return null;
@@ -50,15 +50,15 @@ class TakeToolAction
 
     public static function make()
     {
-        return Action::make('Take a tool')
+        return Action::make(__('Take a tool'))
             ->schema(self::form())
             ->action(function ($data) {
                 Mouvement::CreateNewMouvement($data, LoanMouvement::class);
 
                 //Create a notification to inform the user about the success of the operation
                 Notification::make()
-                    ->title('Tool taken')
-                    ->body('The tool has been successfully taken.')
+                    ->title(__('Tool taken'))
+                    ->body(__('The tool has been successfully taken'))
                     ->success()
                     ->send();
             })

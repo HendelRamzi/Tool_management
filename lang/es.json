@@ -1,0 +1,57 @@
+{
+    "_comment01": "Commun translation",
+
+    "Quantity": "Cantidad",
+    "Old quantity": "Cantidad anterior",
+    "Tool": "Herramienta",
+    "Mouvements": "Historial de movimientos",
+    "Creation date": "Fecha de creación",
+    "Type": "Tipo",
+    "Created at": "Creado el",
+    "Today": "Hoy",
+    "Date range": "Rango de fechas",
+    "From": "Desde",
+    "Until": "Hasta",
+    "Filter": "Filtro",
+    "see_tool": "Ver herramienta",
+    "see_user": "Ver usuario",
+    "Code": "Codigo", 
+    "Remaining quantity": "Cantidad restante",
+    "Email Address": "Correo electrónico",
+    "Status": "Estado",
+
+
+    "_comment03": "Mouvement Section Translation",
+
+    "Movement Type": "Tipo de movimiento",
+    "Mouvement number": "Número de movimiento",
+    "Add new mouvement": "Añadir nuevo movimiento",
+    "Returned Tool Incomplete": "Devolución de herramienta incompleta",
+    "You still have some tools that need to be returned": "Aún tienes algunas herramientas por devolver",
+    "Tool taken": "Herramienta retirada",
+    "Tool returned": "Herramienta devuelta",
+    "The tool has been successfully taken": "La herramienta se ha retirado correctamente.",
+    "The tool has been successfully returned.": "La herramienta se ha devuelto correctamente.",
+    "Take a tool": "Retirar una herramienta",
+    "Return a tool": "Devolver una herramienta",
+    "Select the tool to take": "Selecciona la herramienta a retirar",
+    "Enter the quantity to take": "Ingresa la cantidad a retirar",
+    "Select the tool to return": "Selecciona la herramienta a devolver",
+    "Enter the quantity to return": "Ingresa la cantidad a devolver",
+    "Quantité restante à rendre: ": "Cantidad restante por devolver: :quantity udidade/s",
+    "remaining_quantity": "Cantidad restante: :quantity udidade/s",
+    "No returned tools": "Herramientas aún no devueltas completamente",
+
+
+    "_comment04": "User Section Translation",
+    "User Details": "Detalles del usuario",
+    "Detailed information about the user": "Información detallada sobre el usuario",
+    "User role": "Rol del usuario",
+    "User name": "Nombre de usuario",
+
+    "_comment05": "Tool Section Translation",
+    "Tool reference": "Referencia de la herramienta",
+    "Tool name": "Nombre de la herramienta",
+    "Tool Details": "Detalles de la herramienta",
+    "Detailed information about the tool": "Información detallada sobre la herramienta"
+}

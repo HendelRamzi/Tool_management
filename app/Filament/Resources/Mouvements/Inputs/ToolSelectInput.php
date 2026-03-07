@@ -10,7 +10,7 @@ class ToolSelectInput
     public static function make(array $options = null, string $placeholder = 'Select the tool to take'): Select
     {
         return Select::make('tool_id')
-            ->label('Tool')
+            ->label(__('Tool'))
             ->live()
             ->placeholder($placeholder)
             ->native(false)
