@@ -20,8 +20,9 @@ class MouvementStats extends StatsOverviewWidget
 
     protected function getStats(): array
     {
+        $MouvementTotal = auth()->user()->hasRole(UserRole::super_admin) ? Mouvement::count() : Mouvement::where('user_id', auth()->user()->id)->count(); 
         return [
-            Stat::make('Tools Mouvement', Mouvement::count())
+            Stat::make('Tools Mouvement', $MouvementTotal)
                 ->description('All the mouvement')
                 ->descriptionIcon('heroicon-m-arrow-trending-up')
                 ->chart([7, 2, 10, 3, 15, 4, 17])

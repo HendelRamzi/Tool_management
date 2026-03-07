@@ -33,6 +33,7 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->default()
             ->id('admin')
+            ->unsavedChangesAlerts()
             ->databaseTransactions()
             ->path('admin')
             ->login(Login::class)

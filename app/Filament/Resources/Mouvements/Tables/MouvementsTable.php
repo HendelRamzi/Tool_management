@@ -23,6 +23,7 @@ use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Forms\Components\DatePicker;
+use Filament\Notifications\Notification;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\Summarizers\Summarizer;
 use Filament\Tables\Columns\TextColumn;
@@ -52,30 +53,36 @@ class MouvementsTable
             ->columns([
                 TextColumn::make('user.name')
                     ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: false)
                     ->label('User name'),
 
                 TextColumn::make('mouvementable_type')
                     ->badge()
                     ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: false)
                     ->getStateUsing(fn($record) => $record->getTypeLabel())
                     ->color(fn($record) => $record->typeColor())
                     ->label('Type'),
 
                 TextColumn::make('tool.reference')
                     ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: false)
                     ->label('Tool reference'),
 
                 TextColumn::make('tool.name')
                     ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: false)
                     ->label('Tool name'),
 
                 TextColumn::make('mouvementable.quantity')
                     ->badge()
+                    ->toggleable(isToggledHiddenByDefault: false)
                     ->color("info")
                     ->label('Quantity'),
 
                 TextColumn::make('created_at')
                     ->label('Created at')
+                    ->toggleable(isToggledHiddenByDefault: false)
                     ->sortable(),
             ])
             ->filters([
@@ -117,19 +124,19 @@ class MouvementsTable
                         InwardMouvement::class => 'Stock In',
                     ]),
 
-                // Filter::make('borrowed_not_returned')
-                //     ->label('No returned tools')
-                //     ->query(function (Builder $query): Builder {
+                Filter::make('borrowed_not_returned')
+                    ->label('No returned tools')
+                    ->query(function (Builder $query): Builder {
 
-                //         $toolIds = MouvementService::borrowedToolsForUser(auth()->id())->pluck('id');
+                        $toolIds = MouvementService::borrowedToolsForUser(auth()->id())->pluck('id');
 
-                //         // Si aucun tool valide → on force résultat vide
-                //         if ($toolIds->isEmpty()) {
-                //             return $query->whereRaw('1 = 0');
-                //         }
+                        // Si aucun tool valide → on force résultat vide
+                        if ($toolIds->isEmpty()) {
+                            return $query->whereRaw('1 = 0');
+                        }
 
-                //         return $query->whereIn('tool_id', $toolIds);
-                //     }),
+                        return $query->whereIn('tool_id', $toolIds);
+                    }),
             ])
             ->filtersTriggerAction(
                 fn(Action $action) => $action
@@ -143,9 +150,8 @@ class MouvementsTable
                         ->visible(fn($livewire) => $livewire instanceof ListMouvements)
                         ->url(fn($record) => ToolResource::getUrl('view', ['record' => $record->tool_id])),
                     CostumViewAction::make("see_user", Heroicon::User)
-                        ->visible(fn($livewire) => $livewire instanceof ListMouvements)
+                        ->visible(fn($livewire) => $livewire instanceof ListMouvements || auth()->user()->hasRole(UserRole::super_admin))
                         ->url(fn($record) => ToolResource::getUrl('view', ['record' => $record->tool_id])),
-
                 ])->color("secondary")
             ])
             ->toolbarActions([

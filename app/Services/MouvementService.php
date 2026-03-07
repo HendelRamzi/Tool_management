@@ -67,4 +67,10 @@ class MouvementService
 
         return Tool::whereIn('id', $validToolIds)->get();
     }
+
+    // Check if user has loans
+    public static function userHasLoans($userId): bool
+    {
+        return self::borrowedToolsForUser($userId)->count() > 0 ? true : false;
+    }
 }

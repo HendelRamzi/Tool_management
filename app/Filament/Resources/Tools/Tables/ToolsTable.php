@@ -7,6 +7,7 @@ use App\Enums\UserRole;
 use App\Filament\Resources\Tools\Actions\ToolDeleteAction;
 use App\Models\Tool;
 use Faker\Core\Color;
+use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
@@ -26,20 +27,25 @@ class ToolsTable
         return $table
             ->columns([
                 TextColumn::make('reference')
+                    ->toggleable(isToggledHiddenByDefault: false)
                     ->searchable(),
                 TextColumn::make('name')
+                    ->toggleable(isToggledHiddenByDefault: false)
                     ->wrap(false)
                     ->sortable()
                     ->limit(30)
                     ->searchable(),
                 TextColumn::make('description')
+                    ->toggleable(isToggledHiddenByDefault: false)
                     ->searchable()
                     ->wrap(false)
                     ->limit(30),
                 TextColumn::make('created_at')
+                    ->toggleable(isToggledHiddenByDefault: false)
                     ->dateTime('d/m/Y')
                     ->sortable(),
                 TextColumn::make('qty')
+                    ->toggleable(isToggledHiddenByDefault: false)
                     ->label('Quantity')
                     ->sortable()
                     ->color(fn(int $state) => Tool::ColorQtyMapping($state))
@@ -58,18 +64,22 @@ class ToolsTable
                         ToolStatus::NoDisponible => 'heroicon-o-x-circle',
                         ToolStatus::NoFunctionnal => 'heroicon-o-x-circle',
                         ToolStatus::Archived => 'heroicon-o-archive-box',
-                    }),
+                    })->toggleable(isToggledHiddenByDefault: false),
 
                 TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->toggleable(isToggledHiddenByDefault: false),
             ])
             ->filters([
                 TrashedFilter::make()
-                ->native(false)
-                ->visible(auth()->user()->hasRole(UserRole::super_admin)),
-            ])
+                    ->native(false)
+                    ->visible(auth()->user()->hasRole(UserRole::super_admin)),
+            ])->filtersTriggerAction(
+                fn(Action $action) => $action
+                    ->button()
+                    ->label('Filter'),
+            )
             ->recordActions([
                 ActionGroup::make([
                     EditAction::make(),
