@@ -36,6 +36,7 @@ class AdminPanelProvider extends PanelProvider
             ->unsavedChangesAlerts()
             ->databaseTransactions()
             ->path('admin')
+            ->viteTheme('resources/css/filament/admin/theme.css')
             ->login(Login::class)
             ->profile(isSimple: false)
             ->sidebarFullyCollapsibleOnDesktop()
