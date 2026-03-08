@@ -139,7 +139,7 @@ class MouvementsTable
                         ->visible(fn($livewire) => $livewire instanceof ListMouvements)
                         ->url(fn($record) => ToolResource::getUrl('view', ['record' => $record->tool_id])),
                     CostumViewAction::make(__("see_user"), Heroicon::User)
-                        ->visible(fn($livewire) => $livewire instanceof ListMouvements || auth()->user()->hasRole(UserRole::super_admin))
+                        ->visible(fn($livewire) => $livewire instanceof ListMouvements && auth()->user()->hasRole(UserRole::super_admin))
                         ->url(fn($record) => ToolResource::getUrl('view', ['record' => $record->tool_id])),
                 ])->color("secondary")
             ])

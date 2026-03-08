@@ -1,6 +1,6 @@
 {
     "_comment01": "Commun translation",
-
+    "all": "Todos",
     "Quantity": "Cantidad",
     "Old quantity": "Cantidad anterior",
     "Tool": "Herramienta",
@@ -19,10 +19,12 @@
     "Remaining quantity": "Cantidad restante",
     "Email Address": "Correo electrónico",
     "Status": "Estado",
+    "Stock management": "Gestión de inventario",
 
 
     "_comment03": "Mouvement Section Translation",
-
+    "Taken": "Retirado",
+    "Returned": "Devuelto",
     "Movement Type": "Tipo de movimiento",
     "Mouvement number": "Número de movimiento",
     "Add new mouvement": "Añadir nuevo movimiento",
@@ -41,6 +43,12 @@
     "Quantité restante à rendre: ": "Cantidad restante por devolver: :quantity udidade/s",
     "remaining_quantity": "Cantidad restante: :quantity udidade/s",
     "No returned tools": "Herramientas aún no devueltas completamente",
+    "Add a tool to stock": "Añadir una herramienta al inventario",
+    "Select the tool to add to stock": "Selecciona la herramienta que deseas añadir al inventario",
+    "The entered quantity will be added to the current stock quantity of the selected tool.": "La cantidad introducida se añadirá a la cantidad actual en inventario de la herramienta seleccionada.",
+    "Tool added to stock": "Herramienta añadida al inventario",
+    "The tool has been successfully added to stock.": "La herramienta se ha añadido al inventario correctamente.",
+    "Enter the quantity to add to stock": "Ingresa la cantidad a añadir al inventario",
 
 
     "_comment04": "User Section Translation",

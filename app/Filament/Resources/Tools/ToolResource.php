@@ -26,8 +26,13 @@ class ToolResource extends Resource
     protected static ?string $model = Tool::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::CircleStack;
-    protected static string | UnitEnum | null $navigationGroup = 'Stock management';
+    protected static string|UnitEnum|null $navigationGroup = 'Stock management';
     protected static ?string $recordTitleAttribute = 'name';
+
+    public static function getNavigationLabel(): string
+    {
+        return __('Tool'); // ou __('movements.plural') si tu utilises des traductions
+    }
 
     public static function getNavigationBadge(): ?string
     {

@@ -24,7 +24,7 @@ class MouvementResource extends Resource
     protected static ?string $model = Mouvement::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::ArrowsUpDown;
-    protected static string | UnitEnum | null $navigationGroup = 'Stock management';
+    protected static string|UnitEnum|null $navigationGroup = 'Stock management';
 
     protected static ?string $recordTitleAttribute = 'id';
 
@@ -38,6 +38,11 @@ class MouvementResource extends Resource
         }
 
         return $query;
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('Mouvements'); // ou __('movements.plural') si tu utilises des traductions
     }
 
     public static function getNavigationBadge(): ?string

@@ -50,10 +50,10 @@ class ListMouvements extends ListRecords
     public function getTabs(): array
     {
         return [
-            'all' => Tab::make(),
-            'Taken' => Tab::make()
+            __('all') => Tab::make(),
+            __('Taken') => Tab::make()
                 ->modifyQueryUsing(fn(Builder $query) => $query->where('mouvementable_type', LoanMouvement::class)),
-            'Returned' => Tab::make()
+            __('Returned') => Tab::make()
                 ->modifyQueryUsing(fn(Builder $query) => $query->where('mouvementable_type', ReturnMouvement::class)),
         ];
     }
