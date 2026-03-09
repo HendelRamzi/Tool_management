@@ -67,7 +67,7 @@ class ListMouvements extends ListRecords
                 InwardToolAction::make()
                     ->visible(auth()->user()->hasRole(UserRole::super_admin)),
             ])
-                ->label(__('Añadir nuevo movimiento'))
+                ->label(__('Add new mouvement'))
                 ->color('info')
                 ->icon(Heroicon::ChevronDown)
                 ->button()

@@ -31,7 +31,7 @@ class ToolResource extends Resource
 
     public static function getNavigationLabel(): string
     {
-        return __('Tools'); // ou __('movements.plural') si tu utilises des traductions
+        return __('Tools'); 
     }
 
     public static function getNavigationBadge(): ?string
