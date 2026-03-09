@@ -2,8 +2,6 @@
 
 namespace App\Filament\Resources\Tools\Actions;
 
-use App\Filament\Resources\Mouvements\Pages\Actions\TakeToolAction;
-use App\Filament\Resources\Mouvements\Pages\Actions\ToolSelectInput;
 use App\Filament\Resources\Mouvements\Pages\Actions\ToolTextInput;
 use App\Models\LoanMouvement;
 use App\Models\Mouvement;
@@ -17,8 +15,8 @@ class CreateNewLoanAction
     public static function make($withIcon = false, $record)
     {
         return Action::make("create_new_loan")
-            ->color('success')
-            ->label('Take the tool')
+            ->color('danger')
+            ->label(__('Take the tool'))
             ->requiresConfirmation()
             ->icon($withIcon ? Heroicon::Plus : null)
             ->schema([
@@ -32,7 +30,7 @@ class CreateNewLoanAction
                                 ->whereKey($toolId)
                                 ->value('qty');
 
-                            return "Remaining quantity: {$quantity}";
+                            return __('remaining_quantity', ['quantity' => $quantity]);
                         }
 
                         return null;
@@ -44,8 +42,8 @@ class CreateNewLoanAction
 
                 //Create a notification to inform the user about the success of the operation
                 Notification::make()
-                    ->title('Tool taken')
-                    ->body('The tool has been successfully taken.')
+                    ->title(__('Tool taken'))
+                    ->body(__('The tool has been successfully taken.'))
                     ->success()
                     ->send();
             });

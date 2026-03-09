@@ -3,7 +3,7 @@
     "all": "Todos",
     "Quantity": "Cantidad",
     "Old quantity": "Cantidad anterior",
-    "Tool": "Herramienta",
+    "Tools": "Herramientas",
     "Mouvements": "Historial de movimientos",
     "Creation date": "Fecha de creación",
     "Type": "Tipo",
@@ -20,9 +20,13 @@
     "Email Address": "Correo electrónico",
     "Status": "Estado",
     "Stock management": "Gestión de inventario",
-
+    "Update date": "Actualizado el",
+    "Delete": "Borrar",
+    "password": "Contraseña",
+    
 
     "_comment03": "Mouvement Section Translation",
+
     "Taken": "Retirado",
     "Returned": "Devuelto",
     "Movement Type": "Tipo de movimiento",
@@ -35,7 +39,9 @@
     "The tool has been successfully taken": "La herramienta se ha retirado correctamente.",
     "The tool has been successfully returned.": "La herramienta se ha devuelto correctamente.",
     "Take a tool": "Retirar una herramienta",
+    "Take the tool": "Retirar la herramienta",
     "Return a tool": "Devolver una herramienta",
+    "Return the tool": "Devolver la herramienta",
     "Select the tool to take": "Selecciona la herramienta a retirar",
     "Enter the quantity to take": "Ingresa la cantidad a retirar",
     "Select the tool to return": "Selecciona la herramienta a devolver",
@@ -49,17 +55,57 @@
     "Tool added to stock": "Herramienta añadida al inventario",
     "The tool has been successfully added to stock.": "La herramienta se ha añadido al inventario correctamente.",
     "Enter the quantity to add to stock": "Ingresa la cantidad a añadir al inventario",
+    "Mouvement actions": "Acciones de movimiento",
+
 
 
     "_comment04": "User Section Translation",
+
+    "Users": "Usuarios",
     "User Details": "Detalles del usuario",
     "Detailed information about the user": "Información detallada sobre el usuario",
     "User role": "Rol del usuario",
     "User name": "Nombre de usuario",
+    "Add new user": "Agregar nuevo usuario",
+    "User updated": "Usuario actualizado",
+    "The user has been updated and saved successfully.": "El usuario ha sido actualizado y guardado correctamente.",
+    "User deleted": "Usuario eliminado",
+    "The user has been deleted successfully": "El usuario ha sido eliminado correctamente.",
+    "Personal Information": "Información personal",
+    "Enter the personal details of the user.": "Introduce los datos personales del usuario.",
+    "First Name": "Nombre",
+    "Last Name": "Apellido",
+    "Birthday": "Fecha de nacimiento",
+    "Select the birthday": "Selecciona la fecha de nacimiento",
+    "Address": "Dirección",
 
     "_comment05": "Tool Section Translation",
+
+    "No Disponible": "No disponible",
+    "Disponible": "Disponible",
     "Tool reference": "Referencia de la herramienta",
     "Tool name": "Nombre de la herramienta",
+    "Description": "Descripción",
     "Tool Details": "Detalles de la herramienta",
-    "Detailed information about the tool": "Información detallada sobre la herramienta"
+    "Tool Information": "Información de la herramienta",
+    "Detailed information about the tool": "Información detallada sobre la herramienta",
+    "Add new tool": "Agregar nueva herramienta",
+    "Tool deleted": "Herramienta eliminada",
+    "The tool has been deleted successfully.": "La herramienta ha sido eliminada correctamente.",
+    "Enter tool name": "Ingresa el nombre de la herramienta",
+    "Enter the tool quantity": "Ingresa la cantidad de la herramienta",
+    "Enter the tool reference": "Ingresa la referencia de la herramienta",
+    "Write your discription (Optional)": "Escribe tu descripción (Opcional)",
+    "Returned tool incomplete": "Herramienta devuelta incompleta",
+    "You still have to return :quantity more :tool_name": "Aún debes devolver :quantity más :tool_name",
+    "Last taken: :time minutes ago": "Última retirada: hace :time minutos"
+
+
+
+
+
+
+
+
+
 }

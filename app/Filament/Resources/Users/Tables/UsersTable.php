@@ -22,21 +22,24 @@ class UsersTable
         return $table
             ->columns([
                 TextColumn::make('name')
+                    ->label(__('Code'))
                     ->searchable(),
                 TextColumn::make('email')
-                    ->label('Email address')
+                    ->label(__('Email Address'))
                     ->searchable(),
                 TextColumn::make('roles.name')
-                    ->label('Role')
+                    ->label(__('User role'))
                     ->badge()
                     ->searchable(),
                 TextColumn::make('full_name')
-                    ->label('Full Name'),
+                    ->label(__('User name')),
                 TextColumn::make('created_at')
+                    ->label(__('Created at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
+                    ->label(__('Update date'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -48,7 +51,7 @@ class UsersTable
             ])->filtersTriggerAction(
                 fn(Action $action) => $action
                     ->button()
-                    ->label('Filter'),
+                    ->label(__('Filter')),
             )
             ->recordActions([
                 ActionGroup::make([

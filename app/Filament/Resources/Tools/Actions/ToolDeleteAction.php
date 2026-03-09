@@ -11,14 +11,14 @@ class ToolDeleteAction
     public static function make($withIcon = false)
     {
         return DeleteAction::make()
-            ->label('Delete')
+            ->label(__('Delete'))
             ->requiresConfirmation()
             ->icon($withIcon ? Heroicon::Trash : null)
             ->successNotification(
                 Notification::make()
                     ->success()
-                    ->title('Tool deleted')
-                    ->body('The tool has been deleted successfully.'),
+                    ->title(__('Tool deleted'))
+                    ->body(__('The tool has been deleted successfully.')),
             );
     }
 }

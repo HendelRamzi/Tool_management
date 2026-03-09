@@ -16,22 +16,22 @@ class EditUser extends EditRecord
     {
         return Notification::make()
             ->success()
-            ->title('User updated')
-            ->body('The user has been updated and saved successfully.');
+            ->title(__('User updated'))
+            ->body(__('The user has been updated and saved successfully.'));
     }
 
     protected function getHeaderActions(): array
     {
         return [
             DeleteAction::make()
-                ->label('Delete')
+                ->label(__('Delete'))
                 ->requiresConfirmation()
                 ->icon(Heroicon::Trash)
                 ->successNotification(
                     Notification::make()
                         ->success()
-                        ->title('User deleted')
-                        ->body('The user has been deleted successfully.'),
+                        ->title(__('User deleted'))
+                        ->body(__('The user has been deleted successfully')),
                 )
         ];
     }
