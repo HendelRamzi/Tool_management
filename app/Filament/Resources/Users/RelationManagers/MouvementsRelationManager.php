@@ -25,6 +25,12 @@ class MouvementsRelationManager extends RelationManager
     protected static string $relationship = 'mouvements';
     protected static ?string $title = "User Mouvements";
 
+   public static function getTitle(Model $ownerRecord, string $pageClass): string
+    {
+        return __("User's Mouvements");
+    }
+    
+
     public function form(Schema $schema): Schema
     {
         return $schema

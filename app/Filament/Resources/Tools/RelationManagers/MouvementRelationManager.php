@@ -25,8 +25,11 @@ use Illuminate\Database\Eloquent\Model;
 class MouvementRelationManager extends RelationManager
 {
     protected static string $relationship = 'mouvements';
-    protected static ?string $title = 'Tool mouvements ';
 
+    public static function getTitle(Model $ownerRecord, string $pageClass): string
+    {
+        return __("Tool's mouvements");
+    }
 
     public function getTableQuery(): Builder
     {

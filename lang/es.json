@@ -27,6 +27,8 @@
 
     "_comment03": "Mouvement Section Translation",
 
+    "Tools Mouvement": "Movimiento de herramientas",
+    "All the mouvement": "Todos los movimientos",
     "Taken": "Retirado",
     "Returned": "Devuelto",
     "Movement Type": "Tipo de movimiento",
@@ -81,6 +83,13 @@
 
     "_comment05": "Tool Section Translation",
 
+    "Tool's mouvements": "Movimientos de la herramienta",
+    "User's Mouvements": "Movimientos del usuario",
+    "Archived Tools": "Herramientas archivadas",
+    "Out of stock tools": "Herramientas sin stock",
+    "Loan Stock Tools": "Herramientas prestadas del stock",
+    "Tools Overview": "Resumen de herramientas",
+    "Total Tools": "Total de herramientas",
     "No Disponible": "No disponible",
     "Disponible": "Disponible",
     "Tool reference": "Referencia de la herramienta",

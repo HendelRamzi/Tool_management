@@ -4,9 +4,7 @@ namespace App\Filament\Widgets;
 
 
 use App\Enums\UserRole;
-use App\Models\LoanMouvement;
 use App\Models\Mouvement;
-use App\Models\ReturnMouvement;
 use Filament\Widgets\StatsOverviewWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 
@@ -22,9 +20,7 @@ class MouvementStats extends StatsOverviewWidget
     {
         $MouvementTotal = auth()->user()->hasRole(UserRole::super_admin) ? Mouvement::count() : Mouvement::where('user_id', auth()->user()->id)->count(); 
         return [
-            Stat::make('Tools Mouvement', $MouvementTotal)
-                ->description('All the mouvement')
-                ->descriptionIcon('heroicon-m-arrow-trending-up')
+            Stat::make(__("Tools Mouvement"), $MouvementTotal)
                 ->chart([7, 2, 10, 3, 15, 4, 17])
                 ->color('info'),
             // Stat::make('Archived tools', Mouvement::where('mouvementable_type', LoanMouvement::class)->count()),

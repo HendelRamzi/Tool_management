@@ -1,7 +1,5 @@
 {
     "_comment01": "Commun translation",
-
-
     "all": "Tous",
     "Quantity": "Quantité",
     "Old quantity": "Ancienne quantité",
@@ -22,12 +20,14 @@
     "Email Address": "Adresse e-mail",
     "Status": "Statut",
     "Stock management": "Gestion du stock",
-    "Update date": "Date de mise à jour",
+    "Update date": "Mis à jour le",
     "Delete": "Supprimer",
     "password": "Mot de passe",
 
     "_comment03": "Mouvement Section Translation",
-    
+
+    "Tools Mouvement": "Mouvements des outils",
+    "All the mouvement": "Tous les mouvements",
     "Taken": "Pris",
     "Returned": "Retourné",
     "Movement Type": "Type de mouvement",
@@ -58,7 +58,6 @@
     "Enter the quantity to add to stock": "Entrez la quantité à ajouter au stock",
     "Mouvement actions": "Actions du mouvement",
 
-
     "_comment04": "User Section Translation",
 
     "Users": "Utilisateurs",
@@ -70,7 +69,7 @@
     "User updated": "Utilisateur mis à jour",
     "The user has been updated and saved successfully.": "L’utilisateur a été mis à jour et enregistré avec succès.",
     "User deleted": "Utilisateur supprimé",
-    "The user has been deleted successfully": "L’utilisateur a été supprimé avec succès.",
+    "The user has been deleted successfully": "L’utilisateur a été supprimé avec succès",
     "Personal Information": "Informations personnelles",
     "Enter the personal details of the user.": "Saisissez les informations personnelles de l’utilisateur.",
     "First Name": "Prénom",
@@ -79,9 +78,15 @@
     "Select the birthday": "Sélectionnez la date de naissance",
     "Address": "Adresse",
 
-
     "_comment05": "Tool Section Translation",
-    
+
+    "Tool's mouvements": "Mouvements de l’outil",
+    "User's Mouvements": "Mouvements de l’utilisateur",
+    "Archived Tools": "Outils archivés",
+    "Out of stock tools": "Outils en rupture de stock",
+    "Loan Stock Tools": "Outils prêtés du stock",
+    "Tools Overview": "Aperçu des outils",
+    "Total Tools": "Total des outils",
     "No Disponible": "Indisponible",
     "Disponible": "Disponible",
     "Tool reference": "Référence de l’outil",
