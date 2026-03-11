@@ -29,7 +29,6 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->default()
             ->id('admin')
-            ->unsavedChangesAlerts()
             ->databaseTransactions()
             ->path('')
             ->viteTheme('resources/css/filament/admin/theme.css')
