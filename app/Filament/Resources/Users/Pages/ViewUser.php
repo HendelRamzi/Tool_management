@@ -6,6 +6,8 @@ use App\Filament\Resources\Users\UserResource;
 use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
 use Filament\Support\Icons\Heroicon;
+use Filament\Notifications\Notification;
+use Filament\Actions\RestoreAction;
 
 class ViewUser extends ViewRecord
 {
@@ -21,7 +23,17 @@ class ViewUser extends ViewRecord
     {
         return [
             EditAction::make()
-                ->icon(Heroicon::PencilSquare),
+                ->icon(Heroicon::PencilSquare)
+                 ->hidden(fn() => ! is_null($this->record->deleted_at)),
+
+            RestoreAction::make('Restore')
+                ->successNotification(
+                    Notification::make()
+                        ->success()
+                        ->title('Tool restored')
+                        ->body('The tool has been restored successfully.'),
+                )
+                ->icon(Heroicon::ArrowPath)
         ];
     }
 }
