@@ -12,6 +12,7 @@ use App\Filament\Resources\Tools\Actions\CreateNewReturnAction;
 use App\Filament\Resources\Tools\Pages\EditTool;
 use App\Filament\Resources\Tools\ToolResource;
 use App\Models\Mouvement;
+use App\Models\Tool;
 use App\Services\MouvementService;
 use Filament\Actions\ActionGroup;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -24,16 +25,23 @@ use Illuminate\Database\Eloquent\Model;
 class MouvementRelationManager extends RelationManager
 {
     protected static string $relationship = 'mouvements';
-    protected static ?string $title = 'Tool mouvements ';
+
+    public static function getTitle(Model $ownerRecord, string $pageClass): string
+    {
+        return __("Tool's mouvements");
+    }
 
     public function getTableQuery(): Builder
     {
+        $query = Mouvement::query();
+
         $query = Mouvement::query()->where('tool_id', $this->ownerRecord->id);
 
         if (!auth()->user()->hasRole(UserRole::super_admin)) {
             $query->where('user_id', auth()->id())
                 ->where('tool_id', $this->ownerRecord->id);
         }
+
 
         return $query;
     }
@@ -77,12 +85,11 @@ class MouvementRelationManager extends RelationManager
                         ->hidden(fn() => MouvementService::remainingQuantity($this->ownerRecord->id, auth()->id()) <= 0)
                         ->visible(fn() => $this->ownerRecord->status !== ToolStatus::Archived)
                         ->successRedirectUrl(fn() => ToolResource::getUrl('view', ['record' => $this->ownerRecord->id])),
-                ])->label('Mouvement actions')
+                ])->label(__('Mouvement actions'))
                     ->button()
                     ->outlined()
                     ->icon(Heroicon::ChevronDown)
-                    ->color(""),
-
+                    ->color("gray"),
             ]);
     }
 

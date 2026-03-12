@@ -15,14 +15,19 @@ class ListTools extends ListRecords
 {
     protected static string $resource = ToolResource::class;
 
+    public function getTitle(): string
+    {
+        return __('Tools');
+    }
+
     public function getTabs(): array
     {
         return [
-            'all' => Tab::make(),
-            'Disponible' => Tab::make()
+            __('All') => Tab::make(),
+            __('Disponible') => Tab::make()
                 ->icon('heroicon-o-check-circle')
                 ->modifyQueryUsing(fn(Builder $query) => $query->where('status', ToolStatus::Disponible)),
-            'No Disponible' => Tab::make()
+            __('No Disponible') => Tab::make()
                 ->icon('heroicon-o-x-circle')
                 ->modifyQueryUsing(fn(Builder $query) => $query->where('status', ToolStatus::NoDisponible)),
         ];
@@ -32,7 +37,7 @@ class ListTools extends ListRecords
     {
         return [
             CreateAction::make()
-                ->label('Add new tool')
+                ->label(__('Add new tool'))
                 ->icon(Heroicon::Plus)
                 ->color('info'),
         ];

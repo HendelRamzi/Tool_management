@@ -4,7 +4,6 @@ namespace App\Filament\Resources\Mouvements\Schemas;
 
 use App\Enums\ToolStatus;
 use App\Enums\UserRole;
-use App\Filament\Resources\Tools\Pages\ViewTool;
 use App\Filament\Resources\Tools\ToolResource;
 use App\Filament\Resources\Users\UserResource;
 use App\Models\InwardMouvement;
@@ -25,25 +24,25 @@ class MouvementInfolist
             ->components([
                 TextEntry::make('id')
                     ->weight(FontWeight::Bold)
-                    ->label('Mouvement number'),
+                    ->label(__('Mouvement number')),
 
                 TextEntry::make('user.name')
                     ->tooltip(fn($record) => "{$record->user->full_name}")
-                    ->label('User name'),
+                    ->label(__('User name')),
 
                 TextEntry::make('tool.name')
-                    ->label('Tool name'),
+                    ->label(__('Tool name')),
                     
                 TextEntry::make('mouvementable.old_qty')
                     ->visible(fn($record) => $record->mouvementable_type === InwardMouvement::class)
                     ->badge()
                     ->color('warning')
-                    ->label('Old quantity'),
+                    ->label(__('Old quantity')),
 
                 TextEntry::make('mouvementable.quantity')
                     ->badge()
                     ->color('info')
-                    ->label('Added quantity'),
+                    ->label(__('Quantity')),
 
                 TextEntry::make('mouvementable_type')
                     ->badge()
@@ -51,14 +50,14 @@ class MouvementInfolist
                     ->size(TextSize::Large) 
                     ->getStateUsing(fn($record) => $record->getTypeLabel())
                     ->color(fn($record) => $record->typeColor())
-                    ->label('Type'),
+                    ->label(__('Type')),
 
                 TextEntry::make('created_at')
                     ->date()
-                    ->label('Created at'),
+                    ->label(__('Created at')),
 
-                Section::make("User Details")
-                    ->description('Detailed information about the user')
+                Section::make(__("User Details"))
+                    ->description(__('Detailed information about the user'))
                     ->columnSpanFull()
                     ->collapsible()
                     ->collapsed()
@@ -68,7 +67,7 @@ class MouvementInfolist
                             ->outlined()
                             ->visible(auth()->user()->hasRole(UserRole::super_admin))
                             ->size(Size::Small)
-                            ->label('See user')
+                            ->label(__('See user'))
                             ->color('secondary')
                             ->url(fn($record) => UserResource::getUrl('view', [
                                 'record' => $record->user_id,
@@ -76,21 +75,21 @@ class MouvementInfolist
                     ])
                     ->schema([
                         TextEntry::make('user.name')
-                            ->label('Code'),
+                            ->label(__('Code')),
                         TextEntry::make('user.full_name')
-                            ->label('Name'),
+                            ->label(__('User name')),
                         TextEntry::make('user.roles.name')
                             ->badge()
                             ->weight(FontWeight::Bold)
                             ->size(TextSize::Large)
                             ->color('warning')
-                            ->label('User role'),
+                            ->label(__('User role')),
                         TextEntry::make('user.email')
                             ->copyable()
-                            ->label('Email Address'),
+                            ->label(__('Email Address')),
                     ]),
-                Section::make("Tool Details")
-                    ->description('Detailed information about the tool')
+                Section::make(__("Tool Details"))
+                    ->description(__('Detailed information about the tool'))
                     ->columnSpanFull()
                     ->collapsible()
                     ->collapsed()
@@ -99,7 +98,7 @@ class MouvementInfolist
                         Action::make('goToTool')
                             ->outlined()
                             ->size(Size::Small)
-                            ->label('See tool')
+                            ->label(__('see_tool'))
                             ->color('secondary')
                             ->url(fn($record) => ToolResource::getUrl('view', [
                                 'record' => $record->tool_id,
@@ -108,14 +107,15 @@ class MouvementInfolist
                     ->schema([
                         TextEntry::make('tool.name')
                             ->copyable()
-                            ->label('Tool name'),
+                            ->label(__('Tool name')),
 
                         TextEntry::make('tool.reference')
                             ->copyable()
                             ->weight(FontWeight::Bold)
-                            ->label('Tool reference'),
+                            ->label(__('Tool reference')),
 
                         TextEntry::make('tool.status')
+                            ->label(__('Status'))
                             ->weight(FontWeight::Bold)
                             ->size(TextSize::Large)
                             ->badge()
@@ -134,7 +134,7 @@ class MouvementInfolist
                             }),
 
                         TextEntry::make('tool.qty')
-                            ->label('Remaining quantity')
+                            ->label(__('Remaining quantity'))
                             ->size(TextSize::Large)
                             ->badge()
                             ->color("info"),

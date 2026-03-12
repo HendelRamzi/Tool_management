@@ -20,44 +20,48 @@ class UserForm
         return $schema
             ->components([
                 TextInput::make('name')
-                    ->label('Code')
+                    ->label(__('Code'))
                     ->readOnly()
                     ->visible(fn($livewire) => $livewire instanceof EditUser)
                     ->autocomplete(),
                 TextInput::make('email')
-                    ->label('Email address')
+                    ->label(__('Email Address'))
                     ->email()
                     ->required(),
                 Select::make('roles')
+                    ->label(__('User role'))
                     ->relationship('roles', 'name')
                     ->preload()
                     ->searchable(),
                 TextInput::make('password')
+                    ->label(__('password'))
                     ->password()
                     ->columnSpanFull()
                     ->visible(fn($livewire) => $livewire instanceof \Filament\Resources\Pages\CreateRecord)
                     ->required(),
-                Section::make('Personal Information')
-                    ->description('Enter the personal details of the user.')
+                Section::make(__('Personal Information'))
+                    ->description(__('Enter the personal details of the user.'))
                     ->aside()
                     ->columnSpanFull()
                     ->relationship('personal')
                     ->columns(2)
                     ->schema([
                         TextInput::make('first_name')
+                            ->label(__('First Name'))
                             ->required()
-                            ->placeholder('First Name'),
+                            ->placeholder(__('First Name')),
                         TextInput::make('last_name')
+                            ->label(__('Last Name'))
                             ->required()
-                            ->placeholder('Last Name'),
+                            ->placeholder(__('Last Name')),
                         DatePicker::make('birthday')
-                            ->label('Birthday')
-                            ->placeholder('Select the birthday')
+                            ->label(__('Birthday'))
+                            ->placeholder(__('Select the birthday'))
                             ->maxDate(now()->subYears(18))
                             ->displayFormat('d/m/Y')
                             ->native(false),
                         Textarea::make('address')
-                            ->placeholder('Address')
+                            ->placeholder(__('Address'))
                             ->columnSpanFull(),
                     ]),
 

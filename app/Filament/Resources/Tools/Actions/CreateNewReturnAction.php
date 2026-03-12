@@ -16,13 +16,13 @@ class CreateNewReturnAction
     public static function make($withIcon = false, $record)
     {
         return Action::make("create_new_return")
-            ->color('danger')
-            ->label('Return a tool')
+            ->color('sucess')
+            ->label(__('Return a tool'))
             ->requiresConfirmation()
             ->icon($withIcon ? Heroicon::Minus : null)
             ->schema([
-                ToolTextInput::make('Select the product quantity')
-                    ->hint(fn()  => !is_null($record) ? 'Quantité restante à rendre : ' . MouvementService::remainingQuantity($record->id, auth()->id()) : null)
+                ToolTextInput::make(__("Enter the quantity to take"))
+                    ->hint(fn()  => !is_null($record) ? __('remaining_quantity', ['quantity' => MouvementService::remainingQuantity($record->id, auth()->id()) ]) : null)
                     ->maxValue(fn() => !is_null($record) ? MouvementService::remainingQuantity($record->id, auth()->id()) : null)
             ])
             ->action(function ($data) use ($record) {
@@ -31,8 +31,8 @@ class CreateNewReturnAction
 
                 // Create a notification to inform the user about the success of the operation
                 Notification::make()
-                    ->title('Tool returned')
-                    ->body('The tool has been successfully returned.')
+                    ->title(__('Tool returned'))
+                    ->body(__('The tool has been successfully returned.'))
                     ->success()
                     ->send();
             });

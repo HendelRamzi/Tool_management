@@ -14,22 +14,25 @@ class ToolForm
         return $schema
             ->components([
                 TextInput::make('name')
+                    ->label(__('Tool name'))
                     ->required()
-                    ->placeholder('Enter tool name'),
+                    ->placeholder(__('Enter tool name')),
 
                 TextInput::make('qty')
-                    ->label('Quantity')
+                    ->label(__('Quantity'))
                     ->visible(fn($livewire) => $livewire instanceof EditTool)
                     ->numeric()
                     ->readOnly()
-                    ->placeholder('Enter the tool quantity'),
+                    ->placeholder(__('Enter the tool quantity')),
 
                 TextInput::make('reference')
-                    ->placeholder('Enter the tool reference')
+                    ->label(__("Tool reference"))
+                    ->placeholder(__('Enter the tool reference'))
                     ->required(),
 
                 Textarea::make('description')
-                    ->placeholder('Write your discription (Optional)')
+                    ->label(__('Description'))
+                    ->placeholder(  __('Write your discription (Optional)'))
                     ->columnSpanFull(),
             ]);
     }

@@ -9,6 +9,7 @@
         "php": "^8.2",
         "awcodes/filament-quick-create": "^4.0",
         "bensampo/laravel-enum": "^6.12",
+        "bezhansalleh/filament-language-switch": "^4.1",
         "bezhansalleh/filament-shield": "^4.0",
         "filament/filament": "^4.0",
         "filament/spatie-laravel-media-library-plugin": "^4.0",

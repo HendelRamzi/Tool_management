@@ -25,6 +25,12 @@ class MouvementsRelationManager extends RelationManager
     protected static string $relationship = 'mouvements';
     protected static ?string $title = "User Mouvements";
 
+   public static function getTitle(Model $ownerRecord, string $pageClass): string
+    {
+        return __("User's Mouvements");
+    }
+    
+
     public function form(Schema $schema): Schema
     {
         return $schema
@@ -56,7 +62,7 @@ class MouvementsRelationManager extends RelationManager
             ->defaultGroup('tool.reference')
             ->groups([
                 Group::make('tool.reference')
-                    ->label('Tool reference')
+                    ->label(__('Tool reference'))
                     ->collapsible(),
                 Group::make('created_at')
                     ->date()
@@ -65,26 +71,26 @@ class MouvementsRelationManager extends RelationManager
             ->columns(components: [
                 TextColumn::make('tool.reference')
                     ->searchable()
-                    ->label('Tool reference'),
+                    ->label(__('Tool reference')),
 
                 TextColumn::make('tool.name')
                     ->searchable()
-                    ->label('Tool name'),
+                    ->label(__('Tool name')),
 
                 TextColumn::make('mouvementable_type')
                     ->badge()
                     ->sortable()
                     ->getStateUsing(fn($record) => $record->getTypeLabel())
                     ->color(fn($record) => $record->typeColor())
-                    ->label('Type'),
+                    ->label(__('Type')),
 
                 TextColumn::make('mouvementable.quantity')
                     ->badge()
                     ->color("info")
-                    ->label('Quantity'),
+                    ->label(__('Quantity')),
 
                 TextColumn::make('created_at')
-                    ->label('Created at')
+                    ->label(__('Creation date'))
                     ->sortable(),
             ])
             ->filters([

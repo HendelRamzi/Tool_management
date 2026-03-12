@@ -14,26 +14,26 @@ class UserInfolist
     public static function configure(Schema $schema): Schema
     {
         return $schema->components([
-            Section::make('User Information')
-                ->description('Detailed information about the user')
+            Section::make(__("User Details"))
+                ->description(__('Detailed information about the user'))
                 ->columnSpanFull()
                 ->collapsible()
                 ->columns(3)
                 ->schema([
 
                     TextEntry::make('name')
-                        ->label('Code'),
+                        ->label(__('Code')),
                     TextEntry::make('full_name')
-                        ->label('Name'),
+                        ->label(__('User name')),
                     TextEntry::make('roles.name')
                         ->badge()
+                        ->label(__('User role'))
                         ->weight(FontWeight::Bold)
                         ->size(TextSize::Large)
-                        ->color('warning')
-                        ->label('User role'),
+                        ->color('warning'),
                     TextEntry::make('email')
                         ->copyable()
-                        ->label('Email Address'),
+                        ->label(__('Email Address')),
 
                 ]),
         ]);
