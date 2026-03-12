@@ -21,25 +21,25 @@ class MouvementForm
         return $schema
             ->components([
                 Select::make('mouvementable_type')
-                    ->label('Mouvement type')
-                    ->placeholder('Select the mouvement type')
+                    ->label(__('Movement Type'))
+                    ->placeholder(__('Movement Type'))
                     ->required()
 
                     ->live()
                     ->options([
-                        LoanMouvement::class => 'Take a tool',
-                        ReturnMouvement::class => 'Return a tool',
+                        LoanMouvement::class => __('Take a tool'),
+                        ReturnMouvement::class => __('Return a tool'),
                     ])->native(false),
 
 
-                Section::make('Return a tool')
+                Section::make(__('Return a tool'))
                     ->visible(fn($get) => $get('mouvementable_type') === ReturnMouvement::class)
                     ->columnSpanFull()
                     ->dehydrated()
                     ->columns(2)
                     ->schema(ReturnToolAction::form()),
 
-                Section::make('Take a tool')
+                Section::make(__('Take a tool'))
                     ->visible(fn($get) => $get('mouvementable_type') === LoanMouvement::class)
                     ->columnSpanFull()
                     ->dehydrated()
