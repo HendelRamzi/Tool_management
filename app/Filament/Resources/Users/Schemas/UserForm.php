@@ -32,6 +32,7 @@ class UserForm
                     ->label(__('User role'))
                     ->relationship('roles', 'name')
                     ->preload()
+                    ->required()
                     ->searchable(),
                 TextInput::make('password')
                     ->label(__('password'))
