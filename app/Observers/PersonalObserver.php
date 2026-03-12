@@ -20,7 +20,7 @@ class PersonalObserver
      */
     public function updated(Personal $personal): void
     {
-        //
+        User::GenerateUserName($personal->full_name, $personal->personal); 
     }
 
     /**
