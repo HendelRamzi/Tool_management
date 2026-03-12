@@ -34,6 +34,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->databaseTransactions()
             ->path('admin')
+            ->globalSearch(false)
             ->login(Login::class)
             ->profile(isSimple: false)
             ->sidebarFullyCollapsibleOnDesktop()
